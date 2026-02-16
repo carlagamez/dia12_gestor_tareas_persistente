@@ -1,0 +1,185 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": []
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# Día 12 — Gestor de tareas persistente\n",
+        "\n",
+        "Hoy voy a crear un gestor de tareas que guarda la información en un archivo\n",
+        "y la recupera cuando el programa se ejecuta.\n",
+        "\n",
+        "Conceptos usados:\n",
+        "- funciones\n",
+        "- archivos\n",
+        "- estructura con main()\n",
+        "\n",
+        "Día: 12/100"
+      ],
+      "metadata": {
+        "id": "GJw2hsA2H44c"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def guardar_tarea():\n",
+        "  tarea = input(\"Introducir nueva tarea: \")\n",
+        "\n",
+        "  with open(\"tareas.txt\", \"a\") as archivo:\n",
+        "    archivo.write(tarea + \"\\n\")\n",
+        "\n",
+        "  print(\"tarea guardada correctamente\")"
+      ],
+      "metadata": {
+        "id": "woMn5ibOH6uW"
+      },
+      "execution_count": 1,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def mostrar_tareas():\n",
+        "    print(\"\\n📋 Lista de tareas:\")\n",
+        "\n",
+        "    try:\n",
+        "        with open(\"tareas.txt\", \"r\") as archivo:\n",
+        "            lineas = archivo.readlines()\n",
+        "\n",
+        "            if len(lineas) == 0:\n",
+        "                print(\"No hay tareas todavía.\")\n",
+        "            else:\n",
+        "                for i, linea in enumerate(lineas, start=1):\n",
+        "                    print(i, \"-\", linea.strip())\n",
+        "\n",
+        "    except FileNotFoundError:\n",
+        "        print(\"No hay archivo de tareas todavía.\")"
+      ],
+      "metadata": {
+        "id": "0e4JKHdCILSM"
+      },
+      "execution_count": 2,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def mostrar_menu():\n",
+        "    print(\"\\n--- GESTOR DE TAREAS ---\")\n",
+        "    print(\"1. Añadir tarea\")\n",
+        "    print(\"2. Mostrar tareas\")\n",
+        "    print(\"3. Salir\")"
+      ],
+      "metadata": {
+        "id": "XGVRM0xTISUa"
+      },
+      "execution_count": 3,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "def main():\n",
+        "    opcion = \"\"\n",
+        "\n",
+        "    while opcion != \"3\":\n",
+        "        mostrar_menu()\n",
+        "        opcion = input(\"Elige una opción: \")\n",
+        "\n",
+        "        if opcion == \"1\":\n",
+        "            guardar_tarea()\n",
+        "        elif opcion == \"2\":\n",
+        "            mostrar_tareas()\n",
+        "        elif opcion == \"3\":\n",
+        "            print(\"👋 Hasta luego\")\n",
+        "        else:\n",
+        "            print(\"Opción no válida\")"
+      ],
+      "metadata": {
+        "id": "7CcCZUz-ITwy"
+      },
+      "execution_count": 4,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "main()"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "CejXUqlGIVVx",
+        "outputId": "2a48a946-3156-4b10-992c-6e238070db26"
+      },
+      "execution_count": 5,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "\n",
+            "--- GESTOR DE TAREAS ---\n",
+            "1. Añadir tarea\n",
+            "2. Mostrar tareas\n",
+            "3. Salir\n",
+            "Elige una opción: Lección de python dia 12\n",
+            "Opción no válida\n",
+            "\n",
+            "--- GESTOR DE TAREAS ---\n",
+            "1. Añadir tarea\n",
+            "2. Mostrar tareas\n",
+            "3. Salir\n",
+            "Elige una opción: Añadir tarea\n",
+            "Opción no válida\n",
+            "\n",
+            "--- GESTOR DE TAREAS ---\n",
+            "1. Añadir tarea\n",
+            "2. Mostrar tareas\n",
+            "3. Salir\n",
+            "Elige una opción: Mostrar tareas\n",
+            "Opción no válida\n",
+            "\n",
+            "--- GESTOR DE TAREAS ---\n",
+            "1. Añadir tarea\n",
+            "2. Mostrar tareas\n",
+            "3. Salir\n",
+            "Elige una opción: Salir\n",
+            "Opción no válida\n",
+            "\n",
+            "--- GESTOR DE TAREAS ---\n",
+            "1. Añadir tarea\n",
+            "2. Mostrar tareas\n",
+            "3. Salir\n",
+            "Elige una opción: 3\n",
+            "👋 Hasta luego\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [],
+      "metadata": {
+        "id": "_r_7xPwvIXOJ"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
